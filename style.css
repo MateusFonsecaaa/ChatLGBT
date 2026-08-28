@@ -1,0 +1,1357 @@
+/* =========================================================
+   RESET
+========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+/* =========================================================
+   BODY
+========================================================= */
+body {
+    min-height: 100vh;
+    background-image: url("imagens/fundo-lunar.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #02030a;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
+/* =========================================================
+   CAMADA ESCURA SOBRE O FUNDO
+========================================================= */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(2, 3, 15, 0.02) 0%,
+            rgba(2, 3, 15, 0.12) 50%,
+            rgba(0, 0, 5, 0.35) 100%
+        );
+    pointer-events: none;
+    z-index: 0;
+}
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+.topo {
+    position: fixed;
+    top: 38px;
+    left: 40px;
+    right: 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 100;
+}
+/* =========================================================
+   LOGO PEQUENO
+========================================================= */
+.marca-mini-logo {
+    width: fit-content;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background:
+        linear-gradient(
+            100deg,
+            #ff00e6 0%,
+            #c000ff 35%,
+            #643cff 70%,
+            #00bfff 100%
+        );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+.marca-mini-texto {
+    margin-top: 5px;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.65);
+}
+/* =========================================================
+   BOTÃO REINICIAR CONVERSA
+========================================================= */
+.botao-reiniciar {
+    width: 58px;
+    height: 58px;
+    border-radius: 17px;
+    border: 1px solid rgba(124, 58, 237, 0.65);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(28, 8, 45, 0.72),
+            rgba(4, 18, 39, 0.72)
+        );
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+.botao-reiniciar svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition:
+        transform 0.35s ease,
+        stroke 0.25s ease;
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(170, 70, 255, 0.45)
+        );
+}
+/* aparece somente durante a conversa */
+
+body:has(.area-conversa.ativa) .botao-reiniciar {
+    display: flex;
+}
+
+
+.botao-reiniciar:hover {
+    transform: scale(1.06);
+
+    border-color: #d52cff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(90, 20, 125, 0.82),
+            rgba(16, 29, 67, 0.82)
+        );
+
+    box-shadow:
+        0 0 14px rgba(213, 44, 255, 0.42),
+        0 0 25px rgba(80, 70, 255, 0.18);
+}
+
+
+.botao-reiniciar:hover svg {
+    transform: rotate(-35deg);
+
+    stroke: #dca8ff;
+}
+
+
+.botao-reiniciar:active {
+    transform: scale(0.94);
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+========================================================= */
+
+.conteudo-principal {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-top: 13vh;
+    padding-bottom: 30px;
+}
+
+
+/* =========================================================
+   TELA INICIAL
+========================================================= */
+
+.apresentacao {
+    width: min(1100px, 94vw);
+
+    flex-shrink: 0;
+
+    text-align: center;
+}
+
+
+#tela-inicial {
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+}
+
+
+#tela-inicial.oculta {
+    display: none;
+
+    opacity: 0;
+
+    transform: translateY(-30px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LOGO PRINCIPAL
+========================================================= */
+
+.logo {
+    font-size:
+        clamp(
+            108px,
+            7.7vw,
+            138px
+        );
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    line-height: 0.88;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            100deg,
+            #ff00e6 0%,
+            #d800ff 28%,
+            #7a38ff 58%,
+            #00bfff 100%
+        );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    color: transparent;
+
+    text-transform: uppercase;
+
+    transform: scaleX(1.12);
+
+    filter:
+        drop-shadow(
+            0 0 4px
+            rgba(255, 0, 230, 0.55)
+        )
+
+        drop-shadow(
+            0 0 10px
+            rgba(124, 58, 237, 0.35)
+        )
+
+        drop-shadow(
+            0 0 18px
+            rgba(0, 191, 255, 0.18)
+        );
+}
+
+
+/* =========================================================
+   SUBTÍTULO
+========================================================= */
+
+.subtitulo {
+    margin-top: 24px;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    letter-spacing: 6px;
+
+    color:
+        rgba(
+            235,
+            235,
+            245,
+            0.78
+        );
+}
+
+
+/* =========================================================
+   LINHA NEON
+========================================================= */
+
+.linha-neon {
+    width: 62px;
+    height: 2px;
+
+    margin:
+        27px
+        auto
+        31px;
+
+    border-radius: 100px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff00e6,
+            #7447ff,
+            #00bfff
+        );
+
+    box-shadow:
+        0 0 8px
+        rgba(255, 0, 230, 0.7);
+}
+
+
+/* =========================================================
+   PERGUNTA PRINCIPAL
+========================================================= */
+
+.pergunta {
+    font-size:
+        clamp(
+            36px,
+            3vw,
+            45px
+        );
+
+    line-height: 1.15;
+
+    font-weight: 400;
+
+    letter-spacing: -0.5px;
+
+    color: white;
+
+    text-shadow:
+        0 2px 15px
+        rgba(0, 0, 0, 0.8);
+}
+
+
+.pergunta span {
+    background:
+        linear-gradient(
+            90deg,
+            #e600ff,
+            #6a3dff
+        );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================================
+   CATEGORIAS
+========================================================= */
+
+.categorias {
+    width: 830px;
+
+    max-width: 94vw;
+
+    margin: 38px auto 0;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   BOTÕES DE CATEGORIA
+========================================================= */
+
+.categoria {
+    height: 72px;
+
+    padding: 0 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 20px;
+
+    border-radius: 18px;
+
+    border:
+        1px solid
+        rgba(115, 72, 255, 0.68);
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(25, 8, 40, 0.82),
+            rgba(7, 18, 38, 0.84)
+        );
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.95
+        );
+
+    font-size: 17px;
+
+    font-weight: 400;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        inset
+        0 0 18px
+        rgba(80, 50, 255, 0.04),
+
+        0 7px 22px
+        rgba(0, 0, 0, 0.22);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.categoria:nth-child(1) {
+    width: 250px;
+}
+
+.categoria:nth-child(2) {
+    width: 205px;
+}
+
+.categoria:nth-child(3) {
+    width: 210px;
+}
+
+.categoria:nth-child(4) {
+    width: 280px;
+}
+
+.categoria:nth-child(5) {
+    width: 310px;
+}
+
+
+.texto-categoria {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ÍCONES DAS CATEGORIAS
+========================================================= */
+
+.icone {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.icone svg {
+    width: 100%;
+    height: 100%;
+
+    fill: none;
+
+    stroke: #cf2cff;
+
+    stroke-width: 2;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    transition:
+        transform 0.25s ease,
+        stroke 0.25s ease,
+        filter 0.25s ease;
+
+    filter:
+        drop-shadow(
+            0 0 4px
+            rgba(207, 44, 255, 0.9)
+        )
+
+        drop-shadow(
+            0 0 9px
+            rgba(98, 65, 255, 0.4)
+        );
+}
+
+
+/* =========================================================
+   HOVER CATEGORIAS
+========================================================= */
+
+.categoria:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(
+            190,
+            50,
+            255,
+            0.95
+        );
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(45, 12, 68, 0.88),
+            rgba(8, 30, 58, 0.88)
+        );
+
+    box-shadow:
+        0 0 14px
+        rgba(178, 35, 255, 0.2),
+
+        0 8px 26px
+        rgba(0, 0, 0, 0.3);
+}
+
+
+.categoria:hover .icone svg {
+    stroke: #00c8ff;
+
+    transform: scale(1.1);
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(0, 200, 255, 0.9)
+        )
+
+        drop-shadow(
+            0 0 11px
+            rgba(190, 40, 255, 0.55)
+        );
+}
+
+
+/* =========================================================
+   ÁREA DE CONVERSA
+========================================================= */
+
+.area-conversa {
+    width: 100%;
+
+    max-width: none;
+
+    display: none;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    min-height: 0;
+
+    margin: 0;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.area-conversa.ativa {
+    display: flex;
+}
+
+
+/* =========================================================
+   HISTÓRICO DA CONVERSA
+========================================================= */
+
+.historico-conversa {
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 0;
+    min-width: 0;
+
+    flex: 1 1 auto;
+
+    padding:
+        30px
+        150px
+        30px
+        150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 38px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.historico-conversa::-webkit-scrollbar {
+    width: 7px;
+}
+
+
+.historico-conversa::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.historico-conversa::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(212, 44, 255, 0.55),
+            rgba(83, 86, 255, 0.45)
+        );
+
+    border-radius: 20px;
+}
+
+
+.historico-conversa::-webkit-scrollbar-thumb:hover {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(225, 61, 255, 0.8),
+            rgba(83, 135, 255, 0.7)
+        );
+}
+
+
+/* =========================================================
+   MENSAGEM BASE
+========================================================= */
+
+.mensagem {
+    width: fit-content;
+
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    max-width: 100%;
+
+    min-width: 120px;
+
+    min-height: 86px;
+
+    height: auto;
+
+    overflow: visible;
+
+    padding:
+        28px
+        36px;
+
+    border-radius: 28px;
+
+    font-size: 28px;
+
+    line-height: 1.55;
+
+    letter-spacing: 0.1px;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+
+    box-sizing: border-box;
+
+    backdrop-filter: blur(14px);
+
+    animation:
+        entradaMensagem
+        0.35s ease;
+}
+
+
+/* =========================================================
+   MENSAGEM DO USUÁRIO
+========================================================= */
+
+.mensagem-usuario {
+    align-self: flex-end;
+
+    margin-right: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(110, 33, 170, 0.84),
+            rgba(74, 40, 145, 0.84)
+        );
+
+    border:
+        1px solid
+        rgba(190, 70, 255, 0.6);
+
+    box-shadow:
+        0 8px 24px
+        rgba(0, 0, 0, 0.28),
+
+        0 0 18px
+        rgba(178, 35, 255, 0.14);
+
+    border-bottom-right-radius: 8px;
+}
+
+
+/* =========================================================
+   MENSAGEM DO APEX
+========================================================= */
+
+.mensagem-apex {
+    align-self: flex-start;
+
+    margin-left: 0;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(10, 17, 39, 0.93),
+            rgba(20, 10, 42, 0.91)
+        );
+
+    border:
+        1px solid
+        rgba(90, 86, 255, 0.58);
+
+    box-shadow:
+        0 8px 24px
+        rgba(0, 0, 0, 0.3),
+
+        0 0 18px
+        rgba(65, 105, 255, 0.1);
+
+    border-bottom-left-radius: 8px;
+}
+
+
+
+/* =========================================================
+   PROTEÇÃO DO CONTEÚDO DAS MENSAGENS
+========================================================= */
+
+.mensagem > span,
+.mensagem > p,
+.mensagem > div {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* =========================================================
+   NOME APEX
+========================================================= */
+
+.nome-apex {
+    display: block;
+
+    margin-bottom: 16px;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff35e6,
+            #8a45ff,
+            #28c7ff
+        );
+
+    background-clip: text;
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================================
+   ANIMAÇÃO DAS MENSAGENS
+========================================================= */
+
+@keyframes entradaMensagem {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   ÁREA DO INPUT
+========================================================= */
+
+.area-input {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    /* Tela inicial: input preso próximo ao rodapé */
+    position: fixed;
+    left: 0;
+    bottom: 24px;
+
+    margin-top: 0;
+    padding-bottom: 0;
+
+    z-index: 50;
+}
+
+
+/* =========================================================
+   CAIXA PRINCIPAL DO INPUT
+========================================================= */
+
+.caixa-pergunta {
+    width: 2000px;
+
+    max-width: 92vw;
+
+    height: 115px;
+
+    margin:
+        0
+        auto;
+
+    padding:
+        12px
+        14px
+        12px
+        42px;
+
+    display: flex;
+
+    align-items: center;
+
+    border-radius: 62px;
+
+    border:
+        1px solid
+        rgba(117, 77, 255, 0.82);
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(26, 20, 50, 0.96),
+            rgba(8, 18, 42, 0.96)
+        );
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        inset
+        0 0 24px
+        rgba(118, 69, 255, 0.05),
+
+        0 12px 34px
+        rgba(0, 0, 0, 0.32),
+
+        0 0 18px
+        rgba(81, 72, 255, 0.08);
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* =========================================================
+   HOVER / FOCO DO INPUT
+========================================================= */
+
+.caixa-pergunta:hover {
+    border-color:
+        rgba(
+            150,
+            98,
+            255,
+            0.95
+        );
+}
+
+
+.caixa-pergunta:focus-within {
+    border-color:
+        rgba(
+            206,
+            58,
+            255,
+            1
+        );
+
+    box-shadow:
+        0 0 14px
+        rgba(206, 58, 255, 0.3),
+
+        0 0 32px
+        rgba(53, 108, 255, 0.16),
+
+        inset
+        0 0 24px
+        rgba(153, 72, 255, 0.06);
+}
+
+
+/* =========================================================
+   CAMPO DE TEXTO
+========================================================= */
+
+#campo-pergunta {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 27px;
+
+    font-weight: 400;
+
+    letter-spacing: 0.2px;
+
+    padding-right: 32px;
+}
+
+
+#campo-pergunta::placeholder {
+    color:
+        rgba(
+            228,
+            228,
+            240,
+            0.64
+        );
+}
+
+
+/* =========================================================
+   BOTÃO FOGUETE
+========================================================= */
+
+.botao-enviar {
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(170, 84, 255, 1);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #c43cff 0%,
+            #8e29ef 40%,
+            #4d1ba2 75%,
+            #251052 100%
+        );
+
+    cursor: pointer;
+
+    box-shadow:
+        inset
+        0 0 16px
+        rgba(255, 255, 255, 0.08),
+
+        0 0 14px
+        rgba(202, 54, 255, 0.5),
+
+        0 0 30px
+        rgba(88, 62, 255, 0.22);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* =========================================================
+   BORDA INTERNA DO FOGUETE
+========================================================= */
+
+.botao-enviar::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 5px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HALO EXTERNO DO FOGUETE
+========================================================= */
+
+.botao-enviar::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -7px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(178, 58, 255, 0.18);
+
+    box-shadow:
+        0 0 12px
+        rgba(192, 50, 255, 0.18);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SVG DO FOGUETE
+========================================================= */
+
+.icone-foguete {
+    width: 50px;
+    height: 50px;
+
+    fill: none;
+
+    stroke: white;
+
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(255, 255, 255, 0.55)
+        )
+
+        drop-shadow(
+            0 0 10px
+            rgba(205, 60, 255, 0.25)
+        );
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+
+.chama-foguete {
+    stroke: #ff4bd8;
+
+    filter:
+        drop-shadow(
+            0 0 4px
+            rgba(255, 75, 216, 0.75)
+        );
+}
+
+
+/* =========================================================
+   HOVER DO FOGUETE
+========================================================= */
+
+.botao-enviar:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        inset
+        0 0 18px
+        rgba(255, 255, 255, 0.1),
+
+        0 0 18px
+        rgba(224, 63, 255, 0.75),
+
+        0 0 36px
+        rgba(72, 94, 255, 0.42);
+}
+
+
+.botao-enviar:hover .icone-foguete {
+    transform:
+        translateY(-2px)
+        rotate(5deg)
+        scale(1.06);
+
+    filter:
+        drop-shadow(
+            0 0 6px
+            rgba(255, 255, 255, 0.85)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(210, 60, 255, 0.5)
+        );
+}
+
+
+.botao-enviar:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================================================
+   TEXTO ABAIXO DO INPUT
+========================================================= */
+
+.aviso {
+    margin-top: 14px;
+
+    font-size: 20px;
+
+    font-weight: 400;
+
+    color:
+        rgba(
+            220,
+            220,
+            230,
+            0.58
+        );
+}
+
+
+/* =========================================================
+   MODO CONVERSA
+========================================================= */
+
+body:has(.area-conversa.ativa) {
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+
+body:has(.area-conversa.ativa) .conteudo-principal {
+    width: 100%;
+
+    height: 100vh;
+
+    min-height: 0;
+
+    padding:
+        115px
+        0
+        20px
+        0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    align-items: stretch;
+
+    overflow: hidden;
+}
+
+
+body:has(.area-conversa.ativa) .area-conversa {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    max-width: none;
+
+    flex: 1;
+
+    min-height: 0;
+
+    margin: 0;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HISTÓRICO NO MODO CONVERSA
+
+   ESTE É O BLOCO QUE REALMENTE CONTROLA
+   A MARGEM LATERAL DURANTE A CONVERSA.
+========================================================= */
+
+body:has(.area-conversa.ativa) .historico-conversa {
+    width: 100%;
+
+    min-height: 0;
+    min-width: 0;
+
+    flex: 1 1 auto;
+
+    padding:
+        30px
+        150px
+        30px
+        150px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+
+
+/* =========================================================
+   INPUT NO MODO CONVERSA
+========================================================= */
+
+body:has(.area-conversa.ativa) .area-input {
+    width: 100%;
+
+    position: static;
+    left: auto;
+    bottom: auto;
+
+    margin-top: 18px;
+    padding-bottom: 0;
+
+    flex: 0 0 auto;
+    flex-shrink: 0;
+
+    z-index: auto;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE INTERMEDIÁRIA
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .mensagem {
+        max-width: 100%;
+
+        font-size: 23px;
+
+        padding:
+            24px
+            28px;
+    }
+
+
+    #campo-pergunta {
+        font-size: 22px;
+    }
+
+
+    .caixa-pergunta {
+        max-width: 94vw;
+    }
+
+
+    body:has(.area-conversa.ativa) .historico-conversa {
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+}

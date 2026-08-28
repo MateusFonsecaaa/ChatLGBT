@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>APEX - Explorador do Espaço</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- =========================================
+         CABEÇALHO
+    ========================================== -->
+    <header class="topo">
+        <div class="marca-mini">
+            <div class="marca-mini-logo">
+                APEX
+            </div>
+            <div class="marca-mini-texto">
+                EXPLORADOR DO ESPAÇO
+            </div>
+        </div>
+        <button
+            class="botao-reiniciar"
+            id="botao-reiniciar"
+            aria-label="Reiniciar conversa"
+            title="Reiniciar conversa"
+        >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4v6h6"></path>
+                <path d="M5.5 15a8 8 0 1 0 1.7-8.7L4 10"></path>
+            </svg>
+        </button>
+    </header>
+    <!-- =========================================
+         CONTEÚDO PRINCIPAL
+    ========================================== -->
+    <main class="conteudo-principal">
+        <!-- =====================================
+             TELA INICIAL
+        ====================================== -->
+        <section
+            class="apresentacao"
+            id="tela-inicial"
+        >
+            <h1 class="logo">
+                APEX
+            </h1>
+            <p class="subtitulo">
+                EXPLORADOR DO CONHECIMENTO SOBRE O ESPAÇO
+            </p>
+            <div class="linha-neon"></div>
+            <h2 class="pergunta">
+                O que você quer saber
+                <br>
+                sobre o <span>espaço</span> hoje?
+            </h2>
+            <!-- =================================
+                 CATEGORIAS
+            ================================== -->
+            <div class="categorias">
+                <!-- SISTEMA SOLAR -->
+                <button class="categoria">
+                    <span class="icone">
+                        <svg viewBox="0 0 48 48">
+                            <circle
+                                cx="24"
+                                cy="24"
+                                r="8"
+                            ></circle>
+                            <ellipse
+                                cx="24"
+                                cy="24"
+                                rx="19"
+                                ry="8"
+                                transform="rotate(-35 24 24)"
+                            ></ellipse>
+                            <circle
+                                cx="38"
+                                cy="11"
+                                r="2"
+                            ></circle>
+                        </svg>
+                    </span>
+                    <span class="texto-categoria">
+                        Sistema Solar
+                    </span>
+                </button>
+                <!-- ESTRELAS -->
+                <button class="categoria">
+                    <span class="icone">
+                        <svg viewBox="0 0 48 48">
+                            <path
+                                d="
+                                M24 6
+                                L29 18
+                                L42 19
+                                L32 28
+                                L35 41
+                                L24 34
+                                L13 41
+                                L16 28
+                                L6 19
+                                L19 18
+                                Z
+                                "
+                            ></path>
+                        </svg>
+                    </span>
+                    <span class="texto-categoria">
+                        Estrelas
+                    </span>
+                </button>
+                <!-- GALÁXIAS -->
+                <button class="categoria">
+                    <span class="icone">
+                        <svg viewBox="0 0 48 48">
+                            <path
+                                d="
+                                M37 17
+                                C32 9 19 7 12 14
+                                C6 20 9 29 16 32
+                                C23 35 31 32 33 26
+                                C35 21 31 16 26 16
+                                C21 16 18 20 20 24
+                                C22 28 28 28 30 25
+                                "
+                            ></path>
+                            <circle
+                                cx="12"
+                                cy="34"
+                                r="2"
+                            ></circle>
+                            <circle
+                                cx="39"
+                                cy="11"
+                                r="2"
+                            ></circle>
+                        </svg>
+                    </span>
+                    <span class="texto-categoria">
+                        Galáxias
+                    </span>
+                </button>
+                <!-- BURACOS NEGROS -->
+                <button class="categoria">
+                    <span class="icone">
+                        <svg viewBox="0 0 48 48">
+                            <circle
+                                cx="24"
+                                cy="24"
+                                r="7"
+                            ></circle>
+                            <circle
+                                cx="24"
+                                cy="24"
+                                r="14"
+                            ></circle>
+                            <ellipse
+                                cx="24"
+                                cy="24"
+                                rx="20"
+                                ry="9"
+                            ></ellipse>
+                        </svg>
+                    </span>
+                    <span class="texto-categoria">
+                        Buracos Negros
+                    </span>
+                </button>
+                <!-- EXPLORAÇÃO ESPACIAL -->
+                <button class="categoria">
+                    <span class="icone">
+                        <svg viewBox="0 0 48 48">
+                            <path
+                                d="
+                                M29 7
+                                C36 10 39 17 39 17
+                                L27 29
+                                L19 21
+                                Z
+                                "
+                            ></path>
+                            <path
+                                d="
+                                M19 21
+                                L12 23
+                                L8 29
+                                L18 30
+                                "
+                            ></path>
+                            <path
+                                d="
+                                M27 29
+                                L25 36
+                                L19 40
+                                L18 30
+                                "
+                            ></path>
+                            <circle
+                                cx="29"
+                                cy="17"
+                                r="3"
+                            ></circle>
+                        </svg>
+                    </span>
+                    <span class="texto-categoria">
+                        Exploração Espacial
+                    </span>
+                </button>
+            </div>
+        </section>
+        <!-- =====================================
+             ÁREA DA CONVERSA
+             Começa escondida.
+             O JavaScript irá exibi-la depois
+             da primeira pergunta.
+        ====================================== -->
+        <section
+            class="area-conversa"
+            id="area-conversa"
+        >
+            <div
+                class="historico-conversa"
+                id="historico-conversa"
+            >
+                <!--
+                    As mensagens do usuário
+                    e do APEX serão criadas
+                    pelo JavaScript.
+                -->
+            </div>
+        </section>
+        <!-- =====================================
+             INPUT PERMANENTE
+             Existe apenas UMA caixa de pergunta.
+             Ela permanece tanto na tela inicial
+             quanto durante a conversa.
+        ====================================== -->
+        <div class="area-input">
+            <div class="caixa-pergunta">
+                <input
+                    type="text"
+                    id="campo-pergunta"
+                    placeholder="O que você quer saber sobre o espaço?"
+                    autocomplete="off"
+                >
+                <button
+                    class="botao-enviar"
+                    id="botao-enviar"
+                    aria-label="Enviar pergunta"
+                >
+                    <svg
+                        class="icone-foguete"
+                        viewBox="0 0 48 48"
+                        aria-hidden="true"
+                    >
+                        <!-- CORPO DO FOGUETE -->
+                        <path
+                            d="
+                            M28 7
+                            C35 9 40 14 41 21
+                            L29 33
+                            L15 19
+                            Z
+                            "
+                        ></path>
+                        <!-- ASA ESQUERDA -->
+                        <path
+                            d="
+                            M17 21
+                            L10 23
+                            L6 30
+                            L17 29
+                            "
+                        ></path>
+                        <!-- ASA INFERIOR -->
+                        <path
+                            d="
+                            M27 31
+                            L25 39
+                            L18 43
+                            L19 32
+                            "
+                        ></path>
+                        <!-- JANELA -->
+                        <circle
+                            cx="29"
+                            cy="18"
+                            r="3.5"
+                        ></circle>
+                        <!-- CHAMA -->
+                        <path
+                            class="chama-foguete"
+                            d="
+                            M17 31
+                            C13 33 11 36 10 40
+                            C14 39 17 37 19 34
+                            "
+                        ></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="aviso">
+                Pressione Enter para enviar
+            </p>
+        </div>
+    </main>
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+    <script src="script.js"></script>
+</body>
+</html>
